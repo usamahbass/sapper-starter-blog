@@ -1,5 +1,5 @@
 import _ from "lodash";
-import allPost from "./post/*.md";
+import allPost from "./posts/*.md";
 
 export const Posts = _.chain(allPost)
   .map(transform)
@@ -7,7 +7,7 @@ export const Posts = _.chain(allPost)
   .value();
 
 export function transform({ filename, html, metadata }) {
-  const link = filename.replace(/\.md$/, "");
+  const post = filename.replace(/\.md$/, "");
 
   const date = new Date(metadata.date);
 
@@ -15,11 +15,11 @@ export function transform({ filename, html, metadata }) {
     ...metadata,
     filename,
     html,
-    link,
+    post,
     date,
   };
 }
 
-export function findPost(link) {
-  return _.find(Posts, { link });
+export function findPost(post) {
+  return _.find(Posts, { post });
 }
