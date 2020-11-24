@@ -7,7 +7,7 @@ export const Posts = _.chain(allPost)
   .value();
 
 export function transform({ filename, html, metadata }) {
-  const post = filename.replace(/\.md$/, "");
+  const postSlug = filename.replace(/\.md$/, "");
 
   const date = new Date(metadata.date);
 
@@ -15,11 +15,11 @@ export function transform({ filename, html, metadata }) {
     ...metadata,
     filename,
     html,
-    post,
+    postSlug,
     date,
   };
 }
 
-export function findPost(post) {
-  return _.find(Posts, { post });
+export function findPost(postSlug) {
+  return _.find(Posts, { postSlug });
 }
